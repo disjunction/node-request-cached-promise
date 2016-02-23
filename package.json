@@ -6,8 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Konstantin Pogorelov <or@pluseq.com>",
   "license": "ISC",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/disjunction/node-request-cached-promise.git"
+  },
   "dependencies": {
     "cache-manager": "^1.4.0",
     "request-promise": "^2.0.1"
@@ -15,6 +19,6 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5",
-    "nock": "^7.2.2",
+    "nock": "^7.2.2"
   }
 }
