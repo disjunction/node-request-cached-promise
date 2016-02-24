@@ -1,0 +1,1 @@
+combination of request-promise and cache-manager

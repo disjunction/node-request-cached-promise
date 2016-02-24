@@ -1,3 +1,4 @@
+/* eslint-env mocha */
 "use strict";
 
 let requestCached = require("../src/index"),
@@ -42,7 +43,7 @@ function defineTest() {
                     done();
                 })
                 .catch(done);
-        })
+        });
     });
 }
 

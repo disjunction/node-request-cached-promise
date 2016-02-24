@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "cache-manager": "^1.4.0",
-    "request-promise": "^2.0.1"
+    "request-promise": "^2.0.1",
+    "eslint": "^1.10.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",

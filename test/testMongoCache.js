@@ -1,3 +1,4 @@
+/* eslint-env mocha */
 "use strict";
 
 let requestCached = require("../src/index"),
@@ -32,7 +33,7 @@ function defineTest() {
                     return request("http://example.com/test-path");
                 })
                 .then(body => {
-                    expect(body).to.equal("hello foo"); 
+                    expect(body).to.equal("hello foo");
                     // this request would not succeed without caching, because nock works only once
                     return request("http://example.com/test-path");
                 })
@@ -42,7 +43,7 @@ function defineTest() {
                 })
                 .catch(done);
 
-        })
+        });
     });
 }
 

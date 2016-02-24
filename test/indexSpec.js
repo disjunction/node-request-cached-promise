@@ -1,3 +1,4 @@
+/* eslint-env mocha */
 "use strict";
 
 let requestCached = require("../src/index"),
