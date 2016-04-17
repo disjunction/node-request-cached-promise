@@ -7,7 +7,8 @@ function request(uri, options, callback) {
     return rp(uri, options, callback);
 }
 
-function quickHash(str) {
+// http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method
+function hash(str) {
     let hash = 0, char;
     if(!str.length) {
         return hash;
@@ -23,9 +24,9 @@ function quickHash(str) {
 request.getKey = function(requestParam) {
     if (typeof requestParam == "object") {
         if (requestParam.uri) {
-            return requestParam.uri + " " + quickHash(JSON.stringify(requestParam));
+            return requestParam.uri + " " + hash(JSON.stringify(requestParam));
         }
-        return quickHash(JSON.stringify(requestParam));
+        return hash(JSON.stringify(requestParam));
     } else {
         return requestParam;
     }
@@ -33,24 +34,19 @@ request.getKey = function(requestParam) {
 
 /**
  * @param {Object} cache - cache instance generated with cache manager
- * @param {Object} cacheOptions - options used when setting the key (third param wrap())
- * @param {int} cacheOptions.ttl - TTL in seconds
+ * @param {Object} [cacheOptions] - options used when setting the key (third param of wrap())
+ * @param {int} [cacheOptions.ttl] - e.g. TTL in seconds
  * @return {Function} - request-promise function bound to given store
  */
 request.bindToCache = function(cache, cacheOptions) {
+    cacheOptions = cacheOptions || {};
     return function(uri, requestOptions, callback) {
         let key = request.getKey(uri);
 
         return cache.wrap(
             key,
-            () => rp(uri, requestOptions, callback)
-                .then(data => {
-                    if (typeof data == "object") {
-                        return JSON.stringify(data);
-                    } else {
-                        return data;
-                    }
-                }),
+            () => rp(uri, requestOptions, callback),
+            cacheOptions,
             callback
         );
     };
