@@ -8,7 +8,7 @@ function request(uri, options, callback) {
 }
 
 // http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method
-function hash(str) {
+request.hash = function (str) {
     let hash = 0, char;
     if(!str.length) {
         return hash;
@@ -19,14 +19,14 @@ function hash(str) {
         hash = hash & hash; // Convert to 32bit integer
     }
     return "_" + hash;
-}
+};
 
 request.getKey = function(requestParam) {
     if (typeof requestParam == "object") {
         if (requestParam.uri) {
-            return requestParam.uri + " " + hash(JSON.stringify(requestParam));
+            return requestParam.uri + " " + request.hash(JSON.stringify(requestParam));
         }
-        return hash(JSON.stringify(requestParam));
+        return request.hash(JSON.stringify(requestParam));
     } else {
         return requestParam;
     }
